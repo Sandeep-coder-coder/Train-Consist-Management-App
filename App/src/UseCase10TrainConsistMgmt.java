@@ -1,5 +1,6 @@
-import java.util.ArrayList;
-import java.util.List;
+import org.junit.jupiter.api.Test;
+import java.util.*;
+import static org.junit.jupiter.api.Assertions.*;
 
 public class UseCase10TrainConsistMgmt {
 
@@ -13,30 +14,29 @@ public class UseCase10TrainConsistMgmt {
         }
     }
 
-    public static void main(String[] args) {
-
-        System.out.println("=====================================");
-        System.out.println(" UC10 - Count Total Seats in Train ");
-        System.out.println("=====================================\n");
-
-        List<Bogie> bogies = new ArrayList<>();
-
-        bogies.add(new Bogie("Sleeper", 72));
-        bogies.add(new Bogie("AC Chair", 56));
-        bogies.add(new Bogie("First Class", 24));
-        bogies.add(new Bogie("Sleeper", 70));
-
-        System.out.println("Bogies in Train:");
-        for (Bogie b : bogies) {
-            System.out.println(b.name + " -> " + b.capacity);
-        }
-
-        int total = bogies.stream()
+    public static int totalCapacity(List<Bogie> bogies) {
+        return bogies.stream()
                 .map(b -> b.capacity)
                 .reduce(0, Integer::sum);
+    }
 
-        System.out.println("\nTotal Seating Capacity of Train: " + total);
+    public static void main(String[] args) {
+        List<Bogie> bogies = List.of(
+                new Bogie("Sleeper", 72),
+                new Bogie("AC Chair", 56)
+        );
 
-        System.out.println("\nUC10 aggregation completed...");
+        System.out.println("Total: " + totalCapacity(bogies));
+    }
+
+    @Test
+    void testTotalCapacity() {
+        List<Bogie> bogies = List.of(
+                new Bogie("Sleeper", 72),
+                new Bogie("AC Chair", 56)
+        );
+
+        int total = totalCapacity(bogies);
+        assertEquals(128, total);
     }
 }
