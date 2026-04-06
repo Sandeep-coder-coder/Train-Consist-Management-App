@@ -3,7 +3,7 @@ import java.util.*;
 import java.util.stream.Collectors;
 import static org.junit.jupiter.api.Assertions.*;
 
-public class UseCase8TrainConsistMgmtTest {
+public class UseCase8TrainConsistMgmt {
 
     static class Bogie {
         String name;
